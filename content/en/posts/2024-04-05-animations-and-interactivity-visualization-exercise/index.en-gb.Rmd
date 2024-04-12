@@ -26,7 +26,7 @@ my_dat$Value<-sample(1:10,9,replace=T)
 ```
 
 ## Interactive boxplot graph
-Using `ggplotly()` from the `plotly` package. Hover mouse over datapoints in the chart for more details.
+Using `ggplotly()` from the `plotly` package. Hover mouse over datapoints in the chart for more details. Click on a "Company" variable in the legend to include/remove from chart.
 
 ```{r problem_2_data,include=FALSE}
 
