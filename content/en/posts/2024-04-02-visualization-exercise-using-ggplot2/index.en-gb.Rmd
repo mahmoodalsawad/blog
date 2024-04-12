@@ -1,0 +1,186 @@
+---
+title: Visualization exercise using ggplot2
+author: Mahmood Alsawad
+date: '2024-04-02'
+slug: []
+categories: []
+tags: []
+description: ~
+---
+
+```{r setup, include=FALSE}
+
+######DO NOT MODIFY. This will load required packages and data.
+
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggthemes)
+
+cces <- drop_na(read_csv(url("https://www.dropbox.com/s/ahmt12y39unicd2/cces_sample_coursera.csv?raw=1")))
+
+cel <- drop_na(read_csv(url("https://www.dropbox.com/s/4ebgnkdhhxo5rac/cel_volden_wiseman%20_coursera.csv?raw=1")))
+
+```
+
+This is an exercise on data visualization using ggplot2 in RStudio. Data has been imported from two sources:
+
+-   [The Cooperative Congressional Election Study (CCES)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/WOT7O8), a major academic survey about American politics.
+
+-   [The Center for Effective Lawmaking (CEL)](https://thelawmakers.org/data-download), a research project spearheaded by Alan Wiseman (Vanderbilt University) and Craig Volden (University of Virginia).
+
+#### Disclaimer
+
+The data visualizations presented in this post are for **illustrative purposes** only. The underlying data sets were sourced from aforementioned publicly available repositories and have been modified for visual clarity and efficiency. These visualizations should not be interpreted as factual representations, recommendations, or definitive findings. The sole purpose of this post is to showcase data visualization techniques and tools.
+
+## Visualization 1
+
+Visualizing the relationship between income and marital status across different regions with a scatter plot chart.
+
+```{r exercise1,echo=FALSE}
+
+cces1 <- cces %>% 
+  select(region, gender, educ, employ, faminc_new, marstat, ideo5)
+
+cces1$region_name <- recode(cces1$region, `1` = "Northwest", `2` = "Midwest",
+                            `3` = "South", `4` = "West")
+
+cces1$gender_name <- recode(cces1$gender, `1` = "Male", `2` = "Female")
+
+cces1$education_level <- recode(cces1$educ, `1` = "No high school",
+                                `2` = "High school grad",
+                                `3` = "Some college",
+                                `4` = "2-year",
+                                `5` = "4-year",
+                                `6`= "Post-grad")
+
+cces1$employment_level <- recode(cces1$employ, `1` = "Fulltime",
+                                 `2` = "Parttime",
+                                 `3` = "Temporarily laid off",
+                                 `4` = "Unemployed",
+                                 `5` = "Retired",
+                                 `6` = "Permanently disabled",
+                                 `7` = "Homemaker",
+                                 `8` = "Student",
+                                 `9` = "Other")
+
+cces1$income <- recode(cces1$faminc_new, `1` = "less than $10,000",
+                       `2` = "$10,000 - $19,999",
+                       `3` = "$20,000 - $29,999",
+                       `4` = "$30,000 - $39,999",
+                       `5` = "$40,000 - $49,999",
+                       `6` = "$50,000 - $59,999",
+                       `7` = "$60,000 - $69,999",
+                       `8` = "$70,000 - $79,999",
+                       `9` = "$80,000 - $99,999",
+                       `10` = "$100,000 - $119,999",
+                       `11` = "$120,000 - $149,999",
+                       `12` = "$150,000 - $199,999",
+                       `13` = "$200,000 - $249,999",
+                       `14` = "$250,000 - $349,999",
+                       `15` = "$350,000 - $499,999",
+                       `16` = "$500,000 or more"
+                       )
+
+cces1$marital_status <- recode(cces1$marstat, `1` = "Married",
+                               `2` = "Seperated",
+                               `3` = "Divorced",
+                               `4` = "Widowed",
+                               `5` = "Never married",
+                               `6` = "Domestic/civil partnersip")
+
+cces1$political_views <- recode(cces1$ideo5, `1` = "Very liberal",
+                                `2` = "Liberal",
+                                `3` = "Moderate",
+                                `4` = "Conservative",
+                                `5` = "Very conservative")
+                               
+cces1 <- relocate(cces1, region_name, .after = region)
+cces1 <- relocate(cces1, gender_name, .after = gender)
+cces1 <- relocate(cces1, education_level, .after = educ)
+cces1 <- relocate(cces1, employment_level, .after = employ)
+cces1 <- relocate(cces1, income, .after = faminc_new)
+cces1 <- relocate(cces1, marital_status, .after = marstat)
+
+
+cces1 <- cces1 %>% arrange(faminc_new)
+
+
+ggplot(cces1, aes(x = as.factor(faminc_new), y = marital_status, 
+                  color = region_name, alpha = 0.75)) +
+  geom_jitter() +
+  scale_x_discrete(breaks = 1:16, labels = unique(cces1$income)) +
+  labs(y = "Marital Status", x = "Income", color = "Region",
+       title = "Marital status - Income comparison", subtitle = "by region") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  guides(alpha = "none")
+
+```
+
+## Visualization 2
+
+Visualizing income distribution across four regions using a histogram chart. Employing the `face_wrap()` function to create a separate histogram for each region, facilitating a clear comparison of income distribution patterns between them.
+
+```{r exercise2,echo=FALSE}
+
+ggplot(cces1, aes(x = faminc_new)) +
+  geom_density(stat = "density", color = "black", fill = "white") +
+  scale_x_continuous(breaks = 1:16, labels = unique(cces1$income)) +
+  labs(x = "Income", y = NULL, title = "Income distribution across regions") +
+  facet_grid(region_name~.) +
+  theme_gray() +
+  theme(title = element_text(face = "bold")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+```
+
+## Visualization 3
+
+This visualization explores how employment status varies across different regions, broken down by gender using the `facet_wrap()` from ggplot2. To enhance readability and aesthetics, `theme_solarized()` from the ggthemes package has been applied, creating a clear and informative exploration of potential disparities in employment opportunities across geographic locations.
+
+```{r exercise3,echo=FALSE}
+
+ggplot(cces1, aes(x = region_name, fill = employment_level)) +
+  geom_bar(position = "dodge") +
+  theme_solarized() +
+  labs(fill = "Employment Level", 
+       x = "Region", 
+       y = NULL, 
+       title = "Employment status per region") +
+  theme(axis.title.x = element_text(face = "bold", color = "black", size = 12),
+        title = element_text(face = "bold", color = "black", size = 18)) + 
+  scale_fill_brewer(palette = "YlOrRd") +
+  facet_grid(gender_name~.)
+
+```
+
+## Visualization 4
+
+This visualization tracks the rise in female congressional representation over time, spanning the years 1973 to 2017. A line chart would be most suitable, plotting the number of female members on the y-axis and years along the x-axis, effectively depicting the trend of increasing female involvement in the U.S. Congress.
+
+```{r exercise4, echo=FALSE, message=FALSE}
+
+cel1 <- cel %>% 
+  select(year, female, dem)
+
+cel_grouped <- cel1 %>% 
+  filter(female == 1) %>% 
+  group_by(year, dem) %>% 
+  summarize(num_females = n())
+
+cel_grouped$party <- as.factor(recode(cel_grouped$dem, 
+                                      `0` = "Republicans", 
+                                      `1` ="Democrats"))
+
+
+ggplot(cel_grouped, aes(x = year, y = num_females, color = as.factor(party),
+                        group = party)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(min(cel_grouped$year), max(cel_grouped$year), by=2))+
+  scale_y_continuous(breaks = seq(min(cel_grouped$num_females), max(cel_grouped$num_females), by=5))+
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Increase in female membership over the past 20 years", 
+       x = "Year", y = "Number of female members", color = "Party") +
+  scale_color_manual(values = c("Republicans" = "red", "Democrats" = "blue"))
+
+```
