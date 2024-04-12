@@ -42,7 +42,7 @@ ggplot(dat1, aes(x=var1, y=var2)) +
 ```
 
 ## Scatterplot matrix
-using the `ggpairs()` function from the `ggally` package.
+Using the `ggpairs()` function from the `ggally` package.
 
 ```{r problem_2_data,include=FALSE}
 
@@ -86,7 +86,7 @@ ggpairs(dat2,
 ```
 
 ## Shaded correlation matrix
-using `ggcorrplot()`
+Using `ggcorrplot()`
 
 ```{r problem_3_data,include=FALSE}
 
@@ -152,7 +152,7 @@ ggplot(dat4, aes(x=var1,y=reorder(names,var1)))+
 ```
 
 ## Lollipop plot
-using `geom_piont()` and `geom_segment()`
+Using `geom_piont()` and `geom_segment()`
 
 ```{r problem_5_data,include=FALSE}
 
@@ -180,7 +180,7 @@ ggplot(dat5, aes(x = reorder(names, var1), y = var1))+
 ```
 
 ## (Filled) Line chart
-using `geom_area()`
+Using `geom_area()`
 
 ```{r problem_6_data,include=FALSE}
 
@@ -209,7 +209,7 @@ ggplot(books_checked_out, aes(x = Time, y = Total, fill = Genre)) +
 ```
 
 ## Dumbbell chart
-using `geom_dumbbell()` from the `ggalt` package.
+Using `geom_dumbbell()` from the `ggalt` package.
 
 ```{r problem_7_data,include=FALSE, message=FALSE, warning=FALSE}
 

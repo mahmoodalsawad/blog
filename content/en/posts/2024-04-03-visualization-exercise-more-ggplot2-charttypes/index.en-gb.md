@@ -16,7 +16,7 @@ Using the Loess curve method
 <img src="/en/posts/2024-04-03-visualization-exercise-more-ggplot2-charttypes/index.en-gb_files/figure-html/problem_1-1.png" width="672" />
 
 ## Scatterplot matrix
-using the `ggpairs()` function from the `ggally` package.
+Using the `ggpairs()` function from the `ggally` package.
 
 
 
@@ -24,7 +24,7 @@ using the `ggpairs()` function from the `ggally` package.
 <img src="/en/posts/2024-04-03-visualization-exercise-more-ggplot2-charttypes/index.en-gb_files/figure-html/solution_p2-1.png" width="672" />
 
 ## Shaded correlation matrix
-using `ggcorrplot()`
+Using `ggcorrplot()`
 
 
 
@@ -37,21 +37,21 @@ using `ggcorrplot()`
 <img src="/en/posts/2024-04-03-visualization-exercise-more-ggplot2-charttypes/index.en-gb_files/figure-html/problem_4-1.png" width="672" />
 
 ## Lollipop plot
-using `geom_piont()` and `geom_segment()`
+Using `geom_piont()` and `geom_segment()`
 
 
 
 <img src="/en/posts/2024-04-03-visualization-exercise-more-ggplot2-charttypes/index.en-gb_files/figure-html/problem_5-1.png" width="672" />
 
 ## (Filled) Line chart
-using `geom_area()`
+Using `geom_area()`
 
 
 
 <img src="/en/posts/2024-04-03-visualization-exercise-more-ggplot2-charttypes/index.en-gb_files/figure-html/problem_6-1.png" width="672" />
 
 ## Dumbbell chart
-using `geom_dumbbell()` from the `ggalt` package.
+Using `geom_dumbbell()` from the `ggalt` package.
 
 
    

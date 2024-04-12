@@ -1,0 +1,92 @@
+---
+title: Animations and interactivity visualization exercise
+author: Mahmood Alsawad
+date: '2024-04-05'
+slug: []
+categories: []
+tags: []
+description: ~
+---
+
+```{r problem_1_data,include=FALSE}
+
+#####DO NOT MODIFY THIS CHUNK
+library(tidyverse)
+library(gganimate)
+library(gifski)
+
+Category<-c("Alpha","Beta","Zeta")
+City<-c("Hong Kong","London","Nairobi")
+
+my_dat<-expand_grid(Category,City)
+
+set.seed(84684)
+
+my_dat$Value<-sample(1:10,9,replace=T)
+```
+
+## Interactive boxplot graph
+Using `ggplotly()` from the `plotly` package. Hover mouse over datapoints in the chart for more details.
+
+```{r problem_2_data,include=FALSE}
+
+#####DO NOT MODIFY THIS CHUNK
+
+Response<-c("Energize","Amazing","Great")
+set.seed(9819)
+Energize<-tibble(Company=rep("Energize",100),Output=rnorm(100,50,20))
+set.seed(9819)
+Amazing<-tibble(Company=rep("Amazing",100),Output=rnorm(100,50,10))
+set.seed(9819)
+Great<-tibble(Company=rep("Great",100),Output=rnorm(100,40,5))
+
+my_dat<-bind_rows(Energize,Amazing,Great)
+```
+
+```{r problem_2_solution,echo=FALSE,message=FALSE,warning=FALSE}
+
+library(plotly)
+
+###PUT YOUR ggplotly() figure here. It will compile in the R Markdown report.
+
+ggplotly(
+  ggplot(my_dat, aes(x = Company, y = Output, fill = Company))+
+  geom_boxplot()
+  )
+
+```
+
+## Interactive lollipop figure
+Using `ggplotly()` from the `plotly` package. Use slider underneath plot to naviage through time serie.
+
+```{r problem_3_data,echo=FALSE,message=FALSE,warning=FALSE}
+
+library(plotly)
+
+Category<-seq(from=1,to=10)
+Time<-seq(from=1,to=10)
+
+dat3<-expand_grid(Category,Time)
+
+set.seed(78957)
+dat3$Quantity<-runif(100,0,10)
+```
+
+
+```{r problem_3_solution,echo=FALSE,message=FALSE,warning=FALSE}
+
+library(plotly)
+
+###PUT YOUR ggplotly() figure here. It will compile in the R Markdown report.
+
+ggplotly(
+  ggplot(dat3, aes(x = Category, y = Quantity, frame = Time)) +
+  geom_point(size = 1.5) +
+  geom_segment(aes(x = Category, xend = Category, 
+                   y = 0, yend = Quantity)) +
+  theme(axis.text.x = element_text(angle = 90))
+  )
+
+
+```
+
