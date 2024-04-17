@@ -245,7 +245,8 @@ ggplot(data3, aes(x = area_pitch, y = touches, shape = area_pitch))+
   theme(axis.text.x = element_blank())+
   facet_wrap(~Squad) +
   labs(shape = "Area",title = "Atalanta with the highest number of touches in the openents' third",
-       caption = "Source: football-data.co.uk", y = "Number of touches", x = NULL)
+       caption = "Source: football-data.co.uk", y = "Number of touches", x = NULL)+
+  theme(legend.position = "bottom")
   
 ```
 
