@@ -46,7 +46,7 @@ table_age <- data2 %>%
 
 ```
 
-### Introduction
+## Introduction
 Serie A, Italy's top football league, has captivated audiences for over a century. The 2021-2022 season, which saw AC Milan reclaim the championship title, was no exception. This report delves into that season's data, wielding ggplot2, a powerful R package for data visualization, to unlock the stories embedded within the statistics. My aim, with this report isn't to bombard you with facts and figures, but rather to showcase the transformative potential of data visualization. Through captivating graphs and charts, I hope to illuminate trends, highlight team performance, and ultimately, paint a vivid picture of the 2021-2022 Serie A season.
   
 #### Data Sources
@@ -58,7 +58,7 @@ This report relies on data collected from the following sources::
 #### Disclaimer
 The data visualizations presented in this post are for **illustrative purposes** only. The underlying data sets were sourced from aforementioned publicly available repositories and have been modified for visual clarity and efficiency. These visualizations should not be interpreted as factual representations, recommendations, or definitive findings. The sole purpose of this post is to showcase data visualization techniques and tools.
 
-### Visualization 1 - Home Field Advantage
+## Home Field Advantage
 
 This section dives into the number of wins each team achieved while playing at their home stadium. As shown in the plot, Inter takes the lead with the most home victories (14), showcasing a dominant performance on their home turf. Following closely behind is Fiorentina, proving to be a strong contender at home. On the other hand, Cagliari, Genoa, Salernitana and Venezia seem to struggle more on their home field with only 3 wins, grabbing the fewest wins amongst all the teams.
 
@@ -78,7 +78,7 @@ ggplot(viz1, aes(y = reorder(HomeTeam, Home_Win), x = Home_Win)) +
 
 ```
 
-### Visualization 2 - Comeback Kings: Teams Clawing Back from First-Half Deficits
+## Comeback Kings: Teams Clawing Back from First-Half Deficits
 
 This chart highlights the number of comeback victories for teams that trailed at halftime. It's important to remember that only teams with at least one comeback win are showcased here. Teams that haven't secured any come-from-behind wins this season are excluded from this view.
 
@@ -110,7 +110,7 @@ ggplot(viz2, aes(y = fct_reorder(comeback_winner, comeback_wins),
 
 ```
 
-### Vizualization 3 - Squad Age Distribution: 2021-22 Season
+## Squad Age Distribution: 2021-22 Season
 
 This section dives into the average age of Serie A squads for the 2021-22 season. The data, visualized in a table below (generated using the `kable` function from the `knitr` package), reveals interesting trends regarding team experience.
 
@@ -142,7 +142,7 @@ ggplot(data2, aes(y = fct_reorder(Squad, Age), x = Age)) +
 
 ```
 
-### Viualization 4 - Examining Match Results by Time: A Look with ggplot2
+## Examining Match Results by Time: A Look with ggplot2
 
 This section utilizes a scatter plot, generated using the `ggplot2` package in RStudio, to explore the relationship between match day time and the outcome (win, loss, or draw sorted by home/away team). Each data point represents a single match, with its position on the x-axis indicating the time of day and the y-axis signifying the win/loss/draw result.
 
@@ -175,7 +175,7 @@ ggplotly(ggplot(viz11, aes(x = Time, y = Count, color = Result)) +
 
 ```
 
-### Viualization 5 - Ball Possession Breakdown: A Bar Chart Analysis
+## Ball Possession Breakdown: A Bar Chart Analysis
 
 The following bar chart provides a clear illustration of average ball possession percentages across the league, offering a key metric for evaluating team strategies. Napoli stands out as the possession kingpin, averaging an impressive figure at around 60%. This translates to a team that thrives on controlling the flow of the game, likely employing an attacking style that prioritizes ball retention. Conversely, Salernitana resides at the opposite end of the spectrum, averaging a mere 41% possession. This suggests a more defensive approach, where conceding possession and strategically countering attacks could be their weapon of choice. The remaining teams occupy positions between these two extremes, highlighting the diverse tactical philosophies and the varying strengths each team possesses when it comes to controlling the ball. By delving into this distribution, we can glean valuable insights into the playing styles of each team and their preferred tactical approaches on the pitch.
 
@@ -191,7 +191,7 @@ ggplot(data2, aes(y = as.factor(fct_reorder(Squad, Poss)), x = Poss))+
 
 ```
 
-### Visualization 6 - Unveiling Spatial Dominance: A Lollipop Chart Analysis of Ball Touches
+## Unveiling Spatial Dominance: A Lollipop Chart Analysis of Ball Touches
 
 This section delves into a lollipop chart visualization that offers a nuanced perspective on Serie A teams' ball distribution across the three critical zones of the pitch: the defensive third (proximity to their own goal), the midfield third, and the attacking third (proximity to the opponent's goal). Each data point on the chart represents a team, with the lollipop stem acting as a quantitative measure of the team's touches within a specific zone. The lollipop head then takes center stage, highlighting the team's total touches across all zones.
 
@@ -226,7 +226,7 @@ ggplot(data3, aes(y = fct_reorder(Squad,touches), x = touches))+
 
 ```
 
-### Visualization 7 - Another Way to Visualize Ball Touches: A Scatterplot Matrix
+## Another Way to Visualize Ball Touches: A Scatterplot Matrix
 
 This scatterplot matrix offers yet another perspective on the intricate dance of ball distribution across Serie A teams. It serves as a complementary visualization to the previously explored lollipop chart.
 
@@ -250,7 +250,7 @@ ggplot(data3, aes(x = area_pitch, y = touches, shape = area_pitch))+
   
 ```
 
-### Visualization 8 - Unveiling Disciplinary Trends: A Look at Red and Yellow Cards
+## Unveiling Disciplinary Trends: A Look at Red and Yellow Cards
 
 This section utilizes a bar chart to provide a comprehensive breakdown of disciplinary actions in Serie A for the recently concluded season. The data reveals Venezia as the team with the highest number of dismissals (red cards). Furthermore, Venezia ranks second only to Roma in terms of cautions received (yellow cards).  In stark contrast, Inter stands out for their exemplary discipline, having accrued zero red cards throughout the season. This visualization offers a valuable tool for analyzing disciplinary trends across Serie A. By contrasting teams like Venezia, who adopted a more aggressive approach reflected in their red card count, with Inter Milan's success built on a controlled style, this chart provides insights into the various strategies employed to navigate the competitive intensity of Serie A.
 
@@ -273,7 +273,7 @@ ggplot(viz_cards, aes(y = fct_reorder(Squad, number_of_cards),
   labs(x = "Cards recieved",
        y = NULL,
        title = "Inter finished the season with no player sent off",
-       subtitle = "Venezia with the highest number of bookings",
+       subtitle = "Roma with the highest number of yellow cards received",
        caption = "Source: football-data.co.uk"
        ) +
   scale_fill_manual(values = c("Red Cards" = "red", "Yellow Cards" = "#EED202")) +
