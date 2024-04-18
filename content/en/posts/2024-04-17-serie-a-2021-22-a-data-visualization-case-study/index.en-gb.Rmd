@@ -47,10 +47,10 @@ table_age <- data2 %>%
 ```
 
 ## Introduction
-Serie A, Italy's top football league, has captivated audiences for over a century. The 2021-2022 season, which saw AC Milan reclaim the championship title, was no exception. This report delves into that season's data, wielding ggplot2, a powerful R package for data visualization, to unlock the stories embedded within the statistics. My aim, with this report isn't to bombard you with facts and figures, but rather to showcase the transformative potential of data visualization. Through captivating graphs and charts, I hope to illuminate trends, highlight team performance, and ultimately, paint a vivid picture of the 2021-2022 Serie A season.
+Serie A, Italy's top football league, has captivated audiences for over a century. The 2021-2022 season, which saw AC Milan reclaim the championship title, was no exception. This report delves into that season's data, wielding `ggplot2`, a powerful R package for data visualization, to unlock the stories embedded within the statistics. My aim, with this report isn't to bombard you with facts and figures, but rather to showcase the transformative potential of data visualization. Through captivating graphs and charts, I hope to illuminate trends, highlight team performance, and ultimately, paint a vivid picture of the 2021-2022 Serie A season.
   
 #### Data Sources
-This report relies on data collected from the following sources::
+This report relies on data collected from the following sources:
   
 - [Football-Data.co.uk](https://www.football-data.co.uk)
 - [FBref.com](https://fbref.com/en/comps/11/Serie-A-Stats) via [Mustafa Gurkan's Kaggle dataset](https://www.kaggle.com/datasets/mechatronixs/20212022-season-italy-seriea-team-datasets)
