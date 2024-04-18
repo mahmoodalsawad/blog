@@ -58,6 +58,8 @@ This report relies on data collected from the following sources::
 #### Disclaimer
 The data visualizations presented in this post are for **illustrative purposes** only. The underlying data sets were sourced from aforementioned publicly available repositories and have been modified for visual clarity and efficiency. These visualizations should not be interpreted as factual representations, recommendations, or definitive findings. The sole purpose of this post is to showcase data visualization techniques and tools.
 
+------------------------------------------------------------------------
+
 ## Home Field Advantage
 
 This section dives into the number of wins each team achieved while playing at their home stadium. As shown in the plot, Inter takes the lead with the most home victories (14), showcasing a dominant performance on their home turf. Following closely behind is Fiorentina, proving to be a strong contender at home. On the other hand, Cagliari, Genoa, Salernitana and Venezia seem to struggle more on their home field with only 3 wins, grabbing the fewest wins amongst all the teams.
@@ -77,6 +79,8 @@ ggplot(viz1, aes(y = reorder(HomeTeam, Home_Win), x = Home_Win)) +
   theme_minimal()
 
 ```
+
+------------------------------------------------------------------------
 
 ## Comeback Kings: Teams Clawing Back from First-Half Deficits
 
@@ -110,6 +114,8 @@ ggplot(viz2, aes(y = fct_reorder(comeback_winner, comeback_wins),
 
 ```
 
+------------------------------------------------------------------------
+
 ## Squad Age Distribution: 2021-22 Season
 
 This section dives into the average age of Serie A squads for the 2021-22 season. The data, visualized in a table below (generated using the `kable` function from the `knitr` package), reveals interesting trends regarding team experience.
@@ -142,6 +148,8 @@ ggplot(data2, aes(y = fct_reorder(Squad, Age), x = Age)) +
 
 ```
 
+------------------------------------------------------------------------
+
 ## Examining Match Results by Time: A Look with ggplot2
 
 This section utilizes a scatter plot, generated using the `ggplot2` package in RStudio, to explore the relationship between match day time and the outcome (win, loss, or draw sorted by home/away team). Each data point represents a single match, with its position on the x-axis indicating the time of day and the y-axis signifying the win/loss/draw result.
@@ -152,6 +160,7 @@ It's important to acknowledge that this scatter plot might not be the most infor
 
 
 **Interactive Insights:**  Thanks to the power of `ggplotly`, you can hover your mouse over any data point (dot) on the scatter plot to reveal additional information about that specific match. This interactivity can provide a more nuanced understanding of the data beyond the overall trends.
+
 ```{r visualization_1, echo=TRUE}
 viz1 <- data %>% 
   select(Date,Time, FTR) %>% 
@@ -175,6 +184,8 @@ ggplotly(ggplot(viz11, aes(x = Time, y = Count, color = Result)) +
 
 ```
 
+------------------------------------------------------------------------
+
 ## Ball Possession Breakdown: A Bar Chart Analysis
 
 The following bar chart provides a clear illustration of average ball possession percentages across the league, offering a key metric for evaluating team strategies. Napoli stands out as the possession kingpin, averaging an impressive figure at around 60%. This translates to a team that thrives on controlling the flow of the game, likely employing an attacking style that prioritizes ball retention. Conversely, Salernitana resides at the opposite end of the spectrum, averaging a mere 41% possession. This suggests a more defensive approach, where conceding possession and strategically countering attacks could be their weapon of choice. The remaining teams occupy positions between these two extremes, highlighting the diverse tactical philosophies and the varying strengths each team possesses when it comes to controlling the ball. By delving into this distribution, we can glean valuable insights into the playing styles of each team and their preferred tactical approaches on the pitch.
@@ -190,6 +201,8 @@ ggplot(data2, aes(y = as.factor(fct_reorder(Squad, Poss)), x = Poss))+
        caption = "Source: football-data.co.uk")
 
 ```
+
+------------------------------------------------------------------------
 
 ## Unveiling Spatial Dominance: A Lollipop Chart Analysis of Ball Touches
 
@@ -226,6 +239,8 @@ ggplot(data3, aes(y = fct_reorder(Squad,touches), x = touches))+
 
 ```
 
+------------------------------------------------------------------------
+
 ## Another Way to Visualize Ball Touches: A Scatterplot Matrix
 
 This scatterplot matrix offers yet another perspective on the intricate dance of ball distribution across Serie A teams. It serves as a complementary visualization to the previously explored lollipop chart.
@@ -249,6 +264,8 @@ ggplot(data3, aes(x = area_pitch, y = touches, shape = area_pitch))+
   theme(legend.position = "bottom")
   
 ```
+
+------------------------------------------------------------------------
 
 ## Unveiling Disciplinary Trends: A Look at Red and Yellow Cards
 
